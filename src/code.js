@@ -1,6 +1,7 @@
 // This file holds the main code for the plugins. It has access to the *document*.
 // You can access browser APIs such as the network by creating a UI which contains
 // a full browser environment (see documentation).
+
 function hexToRGB(hex) {
     const r = (parseInt(hex.slice(1, 3), 16) / 255);
     const g = (parseInt(hex.slice(3, 5), 16) / 255);

@@ -27,4 +27,3 @@ That's it! Visual Studio Code will regenerate the JavaScript file every time you
 - I switched to use the airtable.browser.js version, but Figma was not happy with "import" or "require" from separate files since it only wants a single JS file, SO
 - I followed the Figma documentation to add Webpack to the project to compile Airtable and my Typescript code into a single file, but Figma did not like the way Airtable was being added and was giving me a "not a constructor" error for creating a new Airtable, SO
 - We tried creating a vanilla.js file and embedded the airtable.browser.js inside rather than importing. This fixed the constructor error but broke all of the imports inside the airtable.browser.js code, SO 
-- 

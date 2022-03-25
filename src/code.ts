@@ -5,54 +5,52 @@
 // a full browser environment (see documentation).
 
 
+function hexToRGB(hex: string) {
+  const r = (parseInt(hex.slice(1, 3), 16) / 255);
+  const g = (parseInt(hex.slice(3, 5), 16) / 255);
+  const b = (parseInt(hex.slice(5, 7), 16) / 255);
 
-
-  function hexToRGB(hex: string) {
-    const r = (parseInt(hex.slice(1, 3), 16) / 255);
-    const g = (parseInt(hex.slice(3, 5), 16) / 255);
-    const b = (parseInt(hex.slice(5, 7), 16) / 255);
-  
-    const result = {
-      r: r,
-      g: g,
-      b: b
-    }
-  
-    return result;
+  const result = {
+    r: r,
+    g: g,
+    b: b
   }
 
-    // Get data from Airtable
-   
-    var base = new Airtable({apiKey: 'keybFJbuq3xnPLGX9'}).base('appblz15LnTqipptS');  
-    base('Unify').select({
-      view: "Grid view"
-    }).firstPage(function (err: string, records: any[]|undefined) {
-      if (err) { console.error(err); return; }
-      if (records) {
-        const newStyles: SolidPaint[] = [];
+  return result;
+}
 
-        console.log('records', records);
-        records.forEach((record) => {
-          const style = figma.createPaintStyle() 
-          style.name = <string>record.get("Name");
-          const colorRGB = hexToRGB(<string>record.get("Value"));
-          const paint: SolidPaint = 
-          {
-            type: 'SOLID',
-            visible: true,
-            opacity: 1, 
-            blendMode: "NORMAL",
-            color: colorRGB
-          }
-          newStyles.push(paint);
-          style.paints = newStyles;
+// Get data from Airtable
+var Airtable = require('./airtable');
+var base = new Airtable({ apiKey: 'keybFJbuq3xnPLGX9' }).base('appblz15LnTqipptS');  
+base('Unify').select({
+  view: "Grid view"
+}).firstPage(function (err: string, records: any[]|undefined) {
+  if (err) { console.error(err); return; }
+  if (records) {
+    const newStyles: SolidPaint[] = [];
 
-        });
-        console.log(newStyles);
-
+    console.log('records', records);
+    records.forEach((record) => {
+      const style = figma.createPaintStyle() 
+      style.name = <string>record.get("Name");
+      const colorRGB = hexToRGB(<string>record.get("Value"));
+      const paint: SolidPaint = 
+      {
+        type: 'SOLID',
+        visible: true,
+        opacity: 1, 
+        blendMode: "NORMAL",
+        color: colorRGB
       }
-    
+      newStyles.push(paint);
+      style.paints = newStyles;
+
     });
+    console.log(newStyles);
+
+  }
+
+});
 
 
 // const nodes: SceneNode[] = [];

@@ -2,7 +2,7 @@
   "name": "Airtable",
   "id": "1088888796164893809",
   "api": "1.0.0",
-  "main": "src/vanilla.js",
+  "main": "dist/code.js",
   "editorType": [
     "figma"
   ]
