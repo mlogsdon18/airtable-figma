@@ -1,0 +1,15 @@
+{
+    "baseId": "appblz15LnTqipptS",
+    "tableName": "Unify",
+    "maxRecords": 200,
+    "fields": [
+        {
+            "name": "Name",
+            "mapToName": "Name"
+        },
+        {
+            "name": "Value",
+            "mapToName": "Value"
+        }
+    ]
+}
