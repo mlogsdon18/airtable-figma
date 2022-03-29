@@ -1,19 +1,21 @@
-Below are the steps to get your plugin running. You can also find instructions at:
+# Airtable Data to Figma Styles
 
-  https://www.figma.com/plugin-docs/setup/
+This is a Figma plugin that will take data from an Airtable table and create color styles in your Figma file. 
 
-This plugin template uses Typescript and NPM, two standard tools in creating JavaScript applications.
+## Using in Figma
 
-Using TypeScript requires a compiler to convert TypeScript (code.ts) into JavaScript (code.js)
-for the browser to run.
+1. To get started with this plugin, download this repo and save it wherever you'd like on your computer.
 
-We recommend writing TypeScript code using Visual Studio code:
+2. You'll have to get the plugin connected to your Airtable account. For this you'll need to create a `.env` file (you can look at the .env.example file in the repo) and reference your Airtable API key. 
 
-Compile TypeScript to JavaScript: Run the "Terminal > Run Build Task..." menu item,
-then select "tsc: watch - tsconfig.json". You will have to do this again every time
-you reopen Visual Studio Code.
+3. You'll then need to make sure that you are referencing the correct Airtable base and table. To do that, you will need to edit `src/records.airtable`. Here you will edit the baseId and tableName of the Airtable you would like to pull from. In order for this to work without editing further code, you will need to leave the fields alone and make sure your table contains those columns. You can view an example Airtable with the proper setup here (https://airtable.com/shrr0b5FUJzBToRON/tblAacn6iRF3PYibR).
 
-That's it! Visual Studio Code will regenerate the JavaScript file every time you save.
+4. Once everything has been added, open your Figma file an go to Plugins > Development > Import plugin from manifest.. 
+![Screenshot of taking these actions within the Figma menu](./figma-screenshot.png)
+
+5. Navigate to where you saved this repo and select the `manifest.json` file in the root of the project. This will add it to your list of plugins.
+
+6. To run the plugin, go to Plugins > Development and click on "Airtable" which should now be at the top of the Development menu. You should see the color styles populate in your Figma file after a second.
 
 ## Additional Helpful Links
 

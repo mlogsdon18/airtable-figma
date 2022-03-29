@@ -2,7 +2,7 @@
 // You can access browser APIs such as the network by creating a UI which contains
 // a full browser environment (see documentation).
 
-import records from './unify.airtable';
+import records from './records.airtable';
 
 
 function hexToRGB(hex: string) {
