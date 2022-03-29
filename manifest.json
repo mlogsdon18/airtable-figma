@@ -3,6 +3,7 @@
   "id": "1088888796164893809",
   "api": "1.0.0",
   "main": "dist/main.js",
+  "build": "/opt/homebrew/bin/node node_modules/.bin/webpack --mode=production",
   "editorType": [
     "figma"
   ]

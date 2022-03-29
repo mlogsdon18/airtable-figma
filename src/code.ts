@@ -16,7 +16,6 @@ function hexToRGB(hex: string) {
     b: b
   }
 
-  console.log(hex);
   return result;
 }
 
