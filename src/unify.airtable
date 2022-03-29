@@ -10,6 +10,10 @@
         {
             "name": "Value",
             "mapToName": "Value"
+        },
+        {
+            "name": "Opacity",
+            "mapToName": "Opacity"
         }
     ]
 }

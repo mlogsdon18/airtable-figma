@@ -19,6 +19,22 @@ function hexToRGB(hex: string) {
   return result;
 }
 
+function rgbtoRGB(rgb: String) {
+  var rgbValues = rgb.substring(4).split(")")[0].split(",");
+
+  let r = parseInt(rgbValues[0]) / 255,
+  g = parseInt(rgbValues[1].substring(0,rgbValues[1].length - 1)) / 255,
+  b = parseInt(rgbValues[2].substring(0,rgbValues[2].length - 1)) / 255;
+
+  const result = {
+    r: r,
+    g: g,
+    b: b
+  }
+
+  return result;
+}
+
 function hslToRGB(hsl: String) {
   var hslValues = hsl.substring(4).split(")")[0].split(",");
 
@@ -66,6 +82,9 @@ const isHsl = (colorValue: string) => {
   return colorValue.includes('hsl');
 }
 
+const isRgb = (colorValue: string) => {
+  return colorValue.includes('rgb');
+}
 
 if (records) {
 
@@ -78,23 +97,20 @@ if (records) {
     colorsArray.push(paint.name)
   );
 
-
-  // TODO: Check if styles already exist and update them before adding duplicates
-  // TODO: Check for which format the color is in (hex, rgb, rgba, hsl, hsla)
-
   
   const newStyles: SolidPaint[] = [];
 
   records.forEach((record) => {
     var colorRGB;
 
-    // Check format of color and convert to RGB with a separate opacity value
+    // Check format of color and convert to RGB object
     if (isHex(record.Value)) {
       colorRGB = hexToRGB(record.Value);
     } else if (isHsl(record.Value)) {
       colorRGB = hslToRGB(record.Value);
+    } else {
+      colorRGB = rgbtoRGB(record.Value);
     }
-
 
     // Check if style already exists in Figma file
     if (colorsArray.includes(record.Name)) { 
@@ -107,14 +123,13 @@ if (records) {
       {
         type: 'SOLID',
         visible: true,
-        opacity: 1, 
+        opacity: record.Opacity, 
         blendMode: "NORMAL",
         color: colorRGB
       }
       existingStyleColor.paints = [paint];
     
-
-
+    // Otherwise create the new style
     } else {
       const style = figma.createPaintStyle() 
       style.name = record.Name;
@@ -122,15 +137,13 @@ if (records) {
       {
         type: 'SOLID',
         visible: true,
-        opacity: 1, 
+        opacity: record.Opacity, 
         blendMode: "NORMAL",
         color: colorRGB
       }
       newStyles.push(paint);
       style.paints = newStyles;
     }
-
-   
 
   });
 
