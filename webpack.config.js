@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
+const webpack = require('webpack');
 
 // For this example, AIRTABLE_API_KEY will need to be setup in environment variables
 const  AIRTABLE_API_KEY  = process.env.AIRTABLE_API_KEY;
@@ -40,5 +41,14 @@ module.exports = (env, argv) => ({
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'), // Compile into a folder called "dist"
   },
+  plugins: [
+    new webpack.EnvironmentPlugin({
+      npm_package_version: '1', // use 'development' unless process.env.NODE_ENV is defined
+      AIRTABLE_ENDPOINT_URL: 'https://api.airtable.com',
+      AIRTABLE_API_KEY: 'keybFJbuq3xnPLGX9'
+    })
+    
+  ]
 
 })
+

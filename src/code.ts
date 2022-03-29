@@ -4,6 +4,7 @@
 
 import records from './unify.airtable';
 
+
 function hexToRGB(hex: string) {
   const r = (parseInt(hex.slice(1, 3), 16) / 255);
   const g = (parseInt(hex.slice(3, 5), 16) / 255);
@@ -15,15 +16,16 @@ function hexToRGB(hex: string) {
     b: b
   }
 
+  console.log(hex);
   return result;
 }
 
 function hslToRGB(hsl: String) {
-  var hslValues = hsl.substring(4).split(")")[0].split(", ");
+  var hslValues = hsl.substring(4).split(")")[0].split(",");
 
-  let h = parseInt(hsl[0]),
-  s = parseInt(hsl[1].substring(0,hsl[1].length - 1)) / 100,
-  l = parseInt(hsl[2].substring(0,hsl[2].length - 1)) / 100;
+  let h = parseInt(hslValues[0]),
+  s = parseInt(hslValues[1].substring(0,hslValues[1].length - 1)) / 100,
+  l = parseInt(hslValues[2].substring(0,hslValues[2].length - 1)) / 100;
 
   let c = (1 - Math.abs(2 * l - 1)) * s,
       x = c * (1 - Math.abs((h / 60) % 2 - 1)),
@@ -53,8 +55,7 @@ function hslToRGB(hsl: String) {
         g: g,
         b: b
       }
-    
-      console.log(result);
+
       return result;
 }
 
@@ -99,6 +100,22 @@ if (records) {
     // Check if style already exists in Figma file
     if (colorsArray.includes(record.Name)) { 
       // We need to overwrite the current style if it already exists 
+      const existingStyle = colors.filter((paint: PaintStyle ) => {
+        return paint.name == record.Name;
+      });
+      const existingStyleColor: PaintStyle = existingStyle[0];
+      const paint: SolidPaint = 
+      {
+        type: 'SOLID',
+        visible: true,
+        opacity: 1, 
+        blendMode: "NORMAL",
+        color: colorRGB
+      }
+      existingStyleColor.paints = [paint];
+    
+
+
     } else {
       const style = figma.createPaintStyle() 
       style.name = record.Name;
