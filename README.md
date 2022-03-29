@@ -30,3 +30,4 @@ That's it! Visual Studio Code will regenerate the JavaScript file every time you
 - We tried creating a vanilla.js file and embedded the airtable.browser.js inside rather than importing. This fixed the constructor error but broke all of the imports inside the airtable.browser.js code, SO 
 - I found a brand new npm package (https://www.npmjs.com/package/airtable-loader) that connects to Airtable and packages the data for use in JavaScript and it works!
 - Slight problem though, this only runs when webpack builds, so if any updates are made to the Airtable, they would not be pulled in. 
+- So I found out that you can add a `build` attribute to the `manifest.json` where you can tell it to do something before the plugin runs. I added code to build the app through Webpack and it now grabs the updated data and then runs!
